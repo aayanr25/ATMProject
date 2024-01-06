@@ -1,13 +1,14 @@
+import java.util.Scanner;
 public class Customer {
     private String name;
     private int pinNum;
+    private Scanner scan;
     public Customer(String name, int pinNum) {
         this.name = name;
         this.pinNum = pinNum;
     }
     public Customer() {
-        name = "";
-        pinNum = 0000;
+
     }
 
     public String getName() {

@@ -42,4 +42,9 @@ public class TransactionHistory {
         return "S" + printedNum;
     }
 
+    public String receipt() {
+        String str = "";
+
+    }
+
 }
