@@ -1,13 +1,16 @@
+import java.util.ArrayList;
 public class TransactionHistory {
     private Customer owner;
     private int totalTransactions;
     private int accTransactionNum;
     private int secTransactionNum;
+    private ArrayList<String> receiptList;
     public TransactionHistory(Customer owner) {
         this.owner = owner;
         totalTransactions = 0;
         accTransactionNum = 0000;
         secTransactionNum = 0000;
+        receiptList = new ArrayList<String>();
     }
 
     public void incrementTransactions() {
@@ -42,9 +45,9 @@ public class TransactionHistory {
         return "S" + printedNum;
     }
 
-    public String receipt() {
-        String str = "";
-
+    public void addReceipt(String receipt) {
+        receiptList.add(receipt);
     }
+
 
 }

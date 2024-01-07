@@ -1,9 +1,9 @@
 import java.util.Scanner;
 public class Customer {
     private String name;
-    private int pinNum;
+    private String pinNum;
     private Scanner scan;
-    public Customer(String name, int pinNum) {
+    public Customer(String name, String pinNum) {
         this.name = name;
         this.pinNum = pinNum;
     }
@@ -15,10 +15,10 @@ public class Customer {
         return name;
     }
 
-    public int getPinNum() {
+    public String getPinNum() {
         return pinNum;
     }
-    public void setPinNum(int pin) {
+    public void setPinNum(String pin) {
         pinNum = pin;
     }
 
