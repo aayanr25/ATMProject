@@ -49,5 +49,15 @@ public class TransactionHistory {
         receiptList.add(receipt);
     }
 
+    public String printableTransactionList() {
+        String str = "";
+        for (int i = 0; i < receiptList.size(); i++) {
+            str += (i + 1) + ". \n";
+            str += receiptList.get(i);
+            str += "\n";
+        }
+        return str;
+    }
+
 
 }
