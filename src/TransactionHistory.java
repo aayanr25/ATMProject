@@ -23,9 +23,9 @@ public class TransactionHistory {
         String printedNum = "" + accTransactionNum;
         if (accTransactionNum < 10) {
             printedNum = "000" + accTransactionNum;
-        } if (accTransactionNum < 100) {
+        } else if (accTransactionNum < 100) {
             printedNum = "00" + accTransactionNum;
-        } if (accTransactionNum < 1000) {
+        } else if (accTransactionNum < 1000) {
             printedNum = "0" + accTransactionNum;
         }
 
@@ -36,9 +36,9 @@ public class TransactionHistory {
         String printedNum = "" + secTransactionNum;
         if (secTransactionNum < 10) {
             printedNum = "000" + secTransactionNum;
-        } if (secTransactionNum < 100) {
+        } else if (secTransactionNum < 100) {
             printedNum = "00" + secTransactionNum;
-        } if (secTransactionNum < 1000) {
+        } else if (secTransactionNum < 1000) {
             printedNum = "0" + secTransactionNum;
         }
 
@@ -52,7 +52,7 @@ public class TransactionHistory {
     public String printableTransactionList() {
         String str = "";
         for (int i = 0; i < receiptList.size(); i++) {
-            str += (i + 1) + ". \n";
+            str += (i + 1) + ") \n";
             str += receiptList.get(i);
             str += "\n";
         }
