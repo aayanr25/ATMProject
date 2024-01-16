@@ -13,6 +13,7 @@ public class ATM {
 
     public void mainMenu() {
         String keepGoing = "y";
+        String receipt = "";
         outerloop:
         while(!keepGoing.equals("n")) {
             ConsoleUtility.clearScreen();
@@ -24,13 +25,12 @@ public class ATM {
                     System.out.println("Too many incorrect PIN entries. Have a nice day.");
                     break outerloop;
                 }
-                System.out.println("Incorrect PIN.");
-                System.out.print("Please re enter your PIN for security: ");
+                System.out.print("Incorrect PIN.");
+                System.out.print("\n\nPlease re enter your PIN for security: ");
                 PIN = scan.nextLine();
                 System.out.println();
                 num++;
             }
-
             System.out.println();
             System.out.println("--------------------");
             System.out.println("(1) Withdraw money\n(2) Deposit money\n(3) Transfer money between accounts\n(4) Get account balances\n(5) Get transaction history\n(6) Change PIN\n(7) Exit");
@@ -61,21 +61,29 @@ public class ATM {
             else if (choice == 4) {
                 System.out.println(currentBalances());
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(3000);
                 } catch (Exception e) {
                     System.out.println("error");
                 }
                 System.out.println();
                 System.out.println("********************");
-                System.out.println("Transaction ID: " + transactions.newSecTransID());
+                receipt  = "Successfully obtained account balances.";
+                receipt += "\nTransaction ID: " + transactions.newSecTransID();
+                System.out.println(receipt);
+                transactions.addReceipt(receipt);
                 System.out.println("********************");
+                System.out.println();
             }
             else if (choice == 5) {
                 System.out.println(transactions.printableTransactionList());
                 System.out.println();
                 System.out.println("********************");
-                System.out.println("Transaction ID: " + transactions.newSecTransID());
+                receipt = "Successfully obtained transaction history.";
+                receipt += "\nTransaction ID: " + transactions.newSecTransID();
+                System.out.println(receipt);
+                transactions.addReceipt(receipt);
                 System.out.println("********************");
+                System.out.println();
                 try {
                     Thread.sleep(1000);
                 } catch (Exception e) {
@@ -96,9 +104,12 @@ public class ATM {
                 }
                 System.out.println();
                 System.out.println("********************");
-                System.out.println("~Successfully changed PIN~");
-                System.out.println("Transaction ID: " + transactions.newSecTransID());
+                receipt = "~Successfully changed PIN~";
+                receipt += "\nTransaction ID: " + transactions.newSecTransID();
+                System.out.println(receipt);
+                transactions.addReceipt(receipt);
                 System.out.println("********************");
+                System.out.println();
             }
             else if(choice == 7) {
                 System.out.println("Thank you for choosing this ATM. Have a great day!");
@@ -107,7 +118,7 @@ public class ATM {
             else {
                 System.out.println("Invalid entry.");
             }
-            System.out.println("Would you like to do something else? (y/n) ");
+            System.out.print("Would you like to do something else? (y/n) ");
             keepGoing = scan.nextLine();
             if (keepGoing.equals("n")) {
                 System.out.println("Thank you for choosing this ATM. Have a great day!");
@@ -118,7 +129,7 @@ public class ATM {
 
     private void welcomeUser() {
         scan = new Scanner(System.in);
-        System.out.println("Welcome! Please enter your information to create your accounts.");
+        System.out.println("Welcome to the greatest ATM in all the land! \nPlease enter your information to create your accounts.");
         System.out.print("Customer name: ");
         String name = scan.nextLine();
         System.out.print("\nEnter new PIN: ");
@@ -127,6 +138,17 @@ public class ATM {
         savings = new Account("savings", owner);
         checking = new Account("checking", owner);
         transactions = new TransactionHistory(owner);
+        try {
+            Thread.sleep(500);
+        } catch (Exception e) {
+            System.out.println("error");
+        }
+        System.out.println(currentBalances());
+        try {
+            Thread.sleep(2000);
+        } catch (Exception e) {
+            System.out.println("error");
+        }
 
     }
 
@@ -178,6 +200,7 @@ public class ATM {
         System.out.println("********************");
         System.out.println(receipt);
         System.out.println("********************");
+        System.out.println();
     }
 
     private void deposit() {
@@ -204,6 +227,7 @@ public class ATM {
         System.out.println("********************");
         System.out.println(receipt);
         System.out.println("********************");
+        System.out.println();
         transactions.addReceipt(receipt);
     }
 
@@ -237,11 +261,12 @@ public class ATM {
             } catch (Exception e) {
                 System.out.println("error");
             }
+        }
             System.out.println();
             System.out.println("********************");
             System.out.println(receipt);
             System.out.println("********************");
+            System.out.println();
             transactions.addReceipt(receipt);
         }
     }
-}
