@@ -178,12 +178,15 @@ public class ATM {
             System.out.println("error");
         }
         if (amt > account.getCurrentBalance()) {
-            System.out.println("Insufficient funds!");
-            receipt += "\nUnsuccessful withdrawal";
+            System.out.println(ConsoleUtility.RED + "Insufficient funds!" + ConsoleUtility.RESET);
+            receipt += ConsoleUtility.RED + "\nUnsuccessful withdrawal" + ConsoleUtility.RESET;
         } else {
             if (amt % 5 == 0) {
+                int numTwenties = numBills(amt);
+                int numFives = (amt - (numTwenties * 20)) / 5;
                 account.withdrawFunds(amt);
-                receipt = "~Successfully withdrew $" + amt + "~";
+                receipt = "~" + ConsoleUtility.GREEN + "Successfully withdrew " + numTwenties + " $20 bills and " + numFives + " $5 bills" + ConsoleUtility.RESET + "~";
+                receipt += "Total withdrawal amount: $" + amt + ".00";
                 receipt += "\nTransaction ID: " + transactions.newAccTransID();
                 receipt += "\n" + currentBalances();
                 transactions.addReceipt(receipt);
@@ -203,6 +206,13 @@ public class ATM {
         System.out.println();
     }
 
+    private int numBills(int withdrawalAmt) {
+        int max = withdrawalAmt / 20;
+        System.out.print("Enter quantity of $20 bills to withdraw (max:" + max + "): ");
+        int num = scan.nextInt();
+        return num;
+    }
+
     private void deposit() {
         String receipt = "";
         Account account = chooseAccount();
@@ -215,7 +225,7 @@ public class ATM {
             System.out.println("error");
         }
         account.depositFunds(amt);
-        receipt += "~Successfully deposited $" + amt + "~";
+        receipt += "~" +ConsoleUtility.GREEN + "Successfully deposited $" + amt + ConsoleUtility.RESET + "~";
         receipt += "\nTransaction ID: " + transactions.newAccTransID();
         receipt += "\n" + currentBalances();
         try {
