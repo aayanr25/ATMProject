@@ -1,3 +1,4 @@
+import java.io.Console;
 import java.util.Scanner;
 public class ATM {
     private Customer owner;
@@ -66,19 +67,22 @@ public class ATM {
                     System.out.println("error");
                 }
                 System.out.println();
+                System.out.println(ConsoleUtility.WHITE + "RECEIPT" + ConsoleUtility.RESET);
                 System.out.println("********************");
-                receipt  = "Successfully obtained account balances.";
+                receipt  = "~" + ConsoleUtility.CYAN + "Successfully obtained account balances." + ConsoleUtility.RESET + "~";
                 receipt += "\nTransaction ID: " + transactions.newSecTransID();
                 System.out.println(receipt);
                 transactions.addReceipt(receipt);
                 System.out.println("********************");
                 System.out.println();
+                scan.nextLine();
             }
             else if (choice == 5) {
                 System.out.println(transactions.printableTransactionList());
                 System.out.println();
+                System.out.println(ConsoleUtility.WHITE + "RECEIPT" + ConsoleUtility.RESET);
                 System.out.println("********************");
-                receipt = "Successfully obtained transaction history.";
+                receipt = "~" + ConsoleUtility.CYAN + "Successfully obtained transaction history." + ConsoleUtility.RESET + "~";
                 receipt += "\nTransaction ID: " + transactions.newSecTransID();
                 System.out.println(receipt);
                 transactions.addReceipt(receipt);
@@ -89,7 +93,6 @@ public class ATM {
                 } catch (Exception e) {
                     System.out.println("error");
                 }
-                System.out.println("Press enter to continue.");
                 scan.nextLine();
             }
             else if(choice == 6) {
@@ -103,8 +106,9 @@ public class ATM {
                     System.out.println("error");
                 }
                 System.out.println();
+                System.out.println(ConsoleUtility.WHITE + "RECEIPT" + ConsoleUtility.RESET);
                 System.out.println("********************");
-                receipt = "~Successfully changed PIN~";
+                receipt = "~" + ConsoleUtility.CYAN + "Successfully changed PIN" + ConsoleUtility.RESET + "~";
                 receipt += "\nTransaction ID: " + transactions.newSecTransID();
                 System.out.println(receipt);
                 transactions.addReceipt(receipt);
@@ -200,6 +204,7 @@ public class ATM {
             System.out.println("error");
         }
         System.out.println();
+        System.out.println(ConsoleUtility.WHITE + "RECEIPT" + ConsoleUtility.RESET);
         System.out.println("********************");
         System.out.println(receipt);
         System.out.println("********************");
@@ -234,6 +239,7 @@ public class ATM {
             System.out.println("error");
         }
         System.out.println();
+        System.out.println(ConsoleUtility.WHITE + "RECEIPT" + ConsoleUtility.RESET);
         System.out.println("********************");
         System.out.println(receipt);
         System.out.println("********************");
@@ -258,12 +264,12 @@ public class ATM {
         double amt = scan.nextDouble();
         scan.nextLine();
         if (amt > fromAcc.getCurrentBalance()) {
-            System.out.println("Insufficient funds!");
-            receipt += "\nUnsuccessful transfer";
+            System.out.println(ConsoleUtility.RED + "Insufficient funds!" + ConsoleUtility.RESET);
+            receipt += ConsoleUtility.RED + "\nUnsuccessful transfer" + ConsoleUtility.RESET;
         } else {
             fromAcc.withdrawFunds(amt);
             toAcc.depositFunds(amt);
-            receipt = "~Successfully transferred $" + amt + " from " + fromAcc.getType() + " to " + toAcc.getType() + "~";
+            receipt = "~" + ConsoleUtility.GREEN + "Successfully transferred $" + amt + " from " + fromAcc.getType() + " to " + toAcc.getType() + ConsoleUtility.RESET +"~";
             receipt += "\nTransaction ID: " + transactions.newAccTransID();
             receipt += "\n" + currentBalances();
             try {
@@ -273,10 +279,15 @@ public class ATM {
             }
         }
             System.out.println();
+            System.out.println(ConsoleUtility.WHITE + "RECEIPT" + ConsoleUtility.RESET);
             System.out.println("********************");
             System.out.println(receipt);
             System.out.println("********************");
             System.out.println();
             transactions.addReceipt(receipt);
+        }
+
+        private void obtainBalances() {
+
         }
     }
