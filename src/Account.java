@@ -6,7 +6,7 @@ public class Account {
     public Account(String type, Customer owner) {
         this.type = type;
         this.owner = owner;
-        currentBalance = 0;
+        currentBalance = 0;  // both accounts have no balance when initialized
     }
 
     public String getType() {
@@ -16,6 +16,7 @@ public class Account {
     public double getCurrentBalance() {
         return currentBalance;
     }
+
     public void depositFunds(double money) {
         currentBalance += money;
     }
@@ -23,7 +24,4 @@ public class Account {
     public void withdrawFunds(double money) {
         currentBalance -= money;
     }
-
-
-
 }

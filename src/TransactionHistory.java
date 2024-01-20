@@ -1,23 +1,17 @@
 import java.util.ArrayList;
 public class TransactionHistory {
     private Customer owner;
-    private int totalTransactions;
     private int accTransactionNum;
     private int secTransactionNum;
     private ArrayList<String> receiptList;
     public TransactionHistory(Customer owner) {
         this.owner = owner;
-        totalTransactions = 0;
         accTransactionNum = 0000;
         secTransactionNum = 0000;
         receiptList = new ArrayList<String>();
     }
 
-    public void incrementTransactions() {
-        totalTransactions++;
-    }
-
-
+    // Each new account transaction requires a new Transaction ID, this method returns the next account ID number available.
     public String newAccTransID() {
         accTransactionNum++;
         String printedNum = "" + accTransactionNum;
@@ -31,6 +25,8 @@ public class TransactionHistory {
 
         return "A" + printedNum;
     }
+
+    // Each new security transaction requires a new Transaction ID, this method returns the next security ID number available.
     public String newSecTransID() {
         secTransactionNum++;
         String printedNum = "" + secTransactionNum;
@@ -45,10 +41,13 @@ public class TransactionHistory {
         return "S" + printedNum;
     }
 
+    // this method adds a String to the receiptList array list.
     public void addReceipt(String receipt) {
         receiptList.add(receipt);
     }
 
+
+    // returns the full transaction list in order from earliest transaction to latest transaction.
     public String printableTransactionList() {
         String str = "";
         for (int i = 0; i < receiptList.size(); i++) {

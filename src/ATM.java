@@ -1,4 +1,3 @@
-import java.io.Console;
 import java.util.Scanner;
 public class ATM {
     private Customer owner;
@@ -8,20 +7,20 @@ public class ATM {
     private Scanner scan;
     public ATM() {
         welcomeUser();
-        mainMenu();
+        mainMenu();  // the mainMenu method is where the program is run, runs until the user is finished.
 
     }
 
     public void mainMenu() {
         String keepGoing = "y";
         String receipt = "";
-        outerloop:
+        outerloop:  // defines first while loop so that it can be ended with a break function within the loop
         while(!keepGoing.equals("n")) {
             ConsoleUtility.clearScreen();
             System.out.print("Please re enter your PIN for security: ");
             String PIN = scan.nextLine();
             int num = 0;
-            while(!PIN.equals(owner.getPinNum())) {
+            while(!PIN.equals(owner.getPinNum())) {  // if the user enters their PIN incorrectly 3 times in a row, they get locked out of their account
                 if (num > 2) {
                     System.out.println("Too many incorrect PIN entries. Have a nice day.");
                     break outerloop;
@@ -72,7 +71,7 @@ public class ATM {
                 receipt  = "~" + ConsoleUtility.CYAN + "Successfully obtained account balances." + ConsoleUtility.RESET + "~";
                 receipt += "\nTransaction ID: " + transactions.newSecTransID();
                 System.out.println(receipt);
-                transactions.addReceipt(receipt);
+                transactions.addReceipt(receipt);  // action goes on the total list of transactions completed by this user.
                 System.out.println("********************");
                 System.out.println();
                 scan.nextLine();
@@ -124,13 +123,14 @@ public class ATM {
             }
             System.out.print("Would you like to do something else? (y/n) ");
             keepGoing = scan.nextLine();
-            if (keepGoing.equals("n")) {
+            if (keepGoing.equals("n")) {  // once user enters 'n' the overall while loop ends, and program finishes.
                 System.out.println("Thank you for choosing this ATM. Have a great day!");
             }
         }
 
     }
 
+    // private helper method serves as a constructor which initializes instance variables within the class
     private void welcomeUser() {
         scan = new Scanner(System.in);
         System.out.println("Welcome to the greatest ATM in all the land! \nPlease enter your information to create your accounts.");
@@ -156,6 +156,7 @@ public class ATM {
 
     }
 
+    // returns the account that the user would like to take an action on, for choice 1, 2, or 3.
     private Account chooseAccount() {
         System.out.print("Would you like to use your (1) savings or (2) checking account: ");
         int choice = scan.nextInt();
@@ -211,6 +212,7 @@ public class ATM {
         System.out.println();
     }
 
+    // returns the number of $20 bills the user wants their withdrawal to include
     private int numBills(int withdrawalAmt) {
         int max = withdrawalAmt / 20;
         System.out.print("Enter quantity of $20 bills to withdraw (max:" + max + "): ");
@@ -247,7 +249,7 @@ public class ATM {
         transactions.addReceipt(receipt);
     }
 
-    public String currentBalances() {
+    private String currentBalances() {
         String str = "Savings Account: $" + savings.getCurrentBalance();
         str += "\nChecking Account: $" + checking.getCurrentBalance();
         return str;
@@ -287,7 +289,4 @@ public class ATM {
             transactions.addReceipt(receipt);
         }
 
-        private void obtainBalances() {
-
-        }
     }
